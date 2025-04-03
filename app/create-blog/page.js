@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TiptapEditor from "@/components/TiptapEditor";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
@@ -7,9 +7,11 @@ import { useRouter } from "next/navigation";
 import { marked } from "marked";
 import { LuBot } from "react-icons/lu";
 import { FaRegSave } from "react-icons/fa";
+import Loading from "../loading";
+
 
 function Page() {
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
   const [topic, setTopic] = useState("");
   const [tone, setTone] = useState("formal");
@@ -19,10 +21,11 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
 
+  
   async function generateBlog(e) {
     e.preventDefault();
     setLoading(true);
-
+    
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/generate`, {
       method: "POST",
       headers: {
@@ -41,13 +44,13 @@ function Page() {
     if (!data.success) {
       toast.error(data.message);
     }
-setTopic('');
+    setTopic('');
     setLoading(false);
   }
-
+  
   async function savingBlog() {
     setLoading(true);
-
+    
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/save`, {
       method: "POST",
       headers: {
@@ -62,11 +65,22 @@ setTopic('');
     } else {
       toast.error(data.message);
     }
-
+    
     setLoading(false);
-  router.push('/dashboard')    
+    router.push('/dashboard')    
   }
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/"); // Redirect to home
+    }
+  }, [status, router]);
+
+  if (status === "loading" || status === "unauthenticated") {
+    return <Loading />;
+  }
+  
+  
   return (
     <div className="max-w-3xl mx-auto p-4 h-full bg-white text-[var(--background)]">
       {/* Title */}

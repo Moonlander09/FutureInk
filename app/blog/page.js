@@ -9,8 +9,10 @@ function Blog() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [blog, setBlog] = useState("");
-  const [loading, setLoading] = useState(false);
+ 
   const id = searchParams.get("id");
+
+ 
 
   useEffect(() => {
     if (!id) {
@@ -19,24 +21,19 @@ function Blog() {
     }
 
     async function fetchBlog() {
-      setLoading(true);
+     
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${id}`, {
           method: "GET",
           cache: "no-store",
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch blog");
-        }
-
         const data = await response.json();
         setBlog(data.blog);
+        
       } catch (error) {
         console.log("Error",error)
-      } finally {
-        setLoading(false);
-      }
+      } 
     }
 
     fetchBlog();

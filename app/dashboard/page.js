@@ -4,9 +4,16 @@ import { FiLogOut } from "react-icons/fi";
 import { signOutAction } from "../_server/actions";
 import { HiPencilSquare } from "react-icons/hi2";
 import UserBlogs from "@/components/UserBlogs";
+import { redirect } from "next/navigation";
+
 
 async function page() {
+
   const session = await auth();
+  if(!session){
+    return redirect('/')
+  }
+
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/getblogs`, {
     method: "GET",
     headers: {

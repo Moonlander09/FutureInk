@@ -8,8 +8,9 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loading from "../loading";
 
+
 function EditBlog() {
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -18,6 +19,7 @@ function EditBlog() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+  
     if (!id) {
       router.replace("/dashboard");
       return;
@@ -74,11 +76,10 @@ function EditBlog() {
     router.push("/dashboard");
   }
 
-    if (!editorContent) {
-        return (
-          <Loading/>
-        );
+     if (status === "loading" || status === "unauthenticated") {
+        return <Loading />;
       }
+      
   return (
     <div className="max-w-3xl mx-auto p-4 h-full bg-white text-[var(--background)]">
       {/* Title */}

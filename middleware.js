@@ -4,6 +4,9 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(req) {
   const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
+  console.log("🔍 Middleware Debug: Request to", req.nextUrl.pathname);
+  console.log("🔑 Middleware Session:", session);
+
   const protectedRoutes = ["/dashboard", "/create-blog", "/blog", "/edit-blog"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     req.nextUrl.pathname.startsWith(route)

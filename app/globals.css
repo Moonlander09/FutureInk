@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #102542;
+  --foreground: #f87060;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+
+@keyframes typing {
+  0% { width: 0; }
+  100% { width: 100%; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.typing-effect {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid currentColor;
+  width: 0;
+  animation: typing 3.5s steps(20, end) infinite alternate;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+
+/* Ensure bullet and numbered lists display correctly in BLog page*/
+.prose ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.prose li {
+  margin-bottom: 5px;
+}
+
+/* Ensure headings display correctly */
+.prose h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.prose h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Ensure horizontal rule displays correctly */
+.prose hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 16px 0;
+}
+
+/* Ensure strikethrough text is styled correctly */
+.prose s {
+  text-decoration: line-through;
+}
+
+/* Ensure bullet and numbered lists display correctly */
+.tiptap-editor ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.tiptap-editor ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.tiptap-editor li {
+  margin-bottom: 5px;
+}
+
+/* Ensure headings display correctly */
+.tiptap-editor h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tiptap-editor h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tiptap-editor h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Ensure horizontal rule displays correctly */
+.tiptap-editor hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 16px 0;
+}
+
+/* Ensure strikethrough text is styled correctly */
+.tiptap-editor s {
+  text-decoration: line-through;
 }

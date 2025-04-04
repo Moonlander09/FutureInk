@@ -10,9 +10,9 @@ function Navbar({user}) {
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl sm:text-3xl font-bold flex items-center gap-2 transform transition duration-300 hover:-translate-y-1 hover:border-b-2"
+          className="text-2xl sm:text-3xl font-bold flex items-center gap-2 transform transition duration-300 hover:-translate-y-1 hover:border-b-2"
         >
-          <FaPenNib className="h-4 w-4  sm:h-5 sm:w-5" />
+          <FaPenNib className="h-5 w-5"/>
           FutureInk
         </Link>
 
